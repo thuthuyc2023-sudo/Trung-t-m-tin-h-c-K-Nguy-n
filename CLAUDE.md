@@ -86,6 +86,15 @@ Nếu dự án chỉ cần 1 trang (one-page site) thì gộp hết các section
 9. **CTA đăng ký cuối trang** — nổi bật, kêu gọi hành động.
 10. **Footer** — thông tin liên hệ, địa chỉ, mạng xã hội, bản đồ (nếu cần), các liên kết nhanh.
 
+## 4b. Backend — Supabase
+
+Form "Đăng ký tư vấn" (modal mở từ các nút CTA) lưu dữ liệu vào **Supabase** (bảng `registrations`):
+
+- Schema + Row Level Security: [supabase/schema.sql](supabase/schema.sql) — chạy 1 lần trong Supabase SQL Editor.
+- Thông tin kết nối: [js/supabase-config.js](js/supabase-config.js) (`SUPABASE_URL`, `SUPABASE_ANON_KEY` — lấy tại Project Settings → API). anon key công khai được ở client vì đã khóa quyền bằng RLS (chỉ cho `insert`, không cho `select/update/delete`).
+- **Quan trọng:** `js/main.js` KHÔNG dùng `<script type="module">` và không dùng `import` tĩnh ở đầu file — cố tình, vì ES module bị trình duyệt chặn tải khi mở trang bằng `file://` (double-click file HTML), sẽ làm hỏng toàn bộ JS của trang. Supabase client được nạp bằng **dynamic `import()`** (gọi hàm, không phải khai báo module) ngay trong submit handler — cách này tải được module từ CDN kể cả khi trang đang mở qua `file://`. Khi sửa `main.js`, giữ nguyên quy ước này; không chuyển sang `type="module"`.
+- Nếu `SUPABASE_URL`/`SUPABASE_ANON_KEY` chưa được điền (còn giá trị `YOUR_SUPABASE_...`), form sẽ hiện thông báo lỗi thân thiện thay vì báo "thành công" giả.
+
 ## 5. Nguyên tắc làm việc
 
 - Giữ code HTML/CSS/JS gọn, không thêm thư viện/dependency nếu không cần thiết.

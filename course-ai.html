@@ -298,6 +298,7 @@
     <div class="modal__body" id="modalFormView">
       <h3 id="registerModalTitle">Đăng ký tư vấn miễn phí</h3>
       <p class="modal__sub">Để lại thông tin, Kỷ Nguyên sẽ liên hệ tư vấn lộ trình học phù hợp cho bạn.</p>
+      <p class="modal__general-error" id="modalGeneralError" hidden></p>
 
       <form id="registerForm" novalidate>
         <div class="field">
@@ -319,7 +320,7 @@
           <label for="regMessage">Nội dung cần tư vấn</label>
           <textarea id="regMessage" name="message" rows="3" placeholder="Bạn muốn tư vấn về khóa học nào? (không bắt buộc)"></textarea>
         </div>
-        <button type="submit" class="btn btn--primary btn--lg modal__submit">Gửi yêu cầu</button>
+        <button type="submit" class="btn btn--primary btn--lg modal__submit" id="modalSubmitBtn">Gửi yêu cầu</button>
       </form>
     </div>
 
@@ -332,6 +333,7 @@
   </div>
 </div>
 
+<script src="js/supabase-config.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

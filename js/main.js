@@ -1,3 +1,20 @@
+// Supabase client được nạp động (dynamic import) từ CDN, chỉ khi cần gửi form.
+// Lý do dùng dynamic import thay vì "import" tĩnh ở đầu file: nếu khai báo
+// "import ... from" ở đây, trình duyệt bắt buộc main.js phải được nạp như
+// ES module (type="module"), mà module lại không tải được khi mở trang bằng
+// file:// (double-click mở file HTML) — sẽ làm hỏng toàn bộ JS của trang.
+let supabaseClientPromise = null;
+function getSupabaseClient() {
+  const url = window.SUPABASE_URL;
+  const key = window.SUPABASE_ANON_KEY;
+  if (!url || !url.startsWith('http')) return Promise.resolve(null);
+  if (!supabaseClientPromise) {
+    supabaseClientPromise = import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/+esm')
+      .then(({ createClient }) => createClient(url, key));
+  }
+  return supabaseClientPromise;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const nav = document.getElementById('nav');
   const burger = document.getElementById('navBurger');
@@ -48,6 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeBtn = document.getElementById('modalClose');
     const successCloseBtn = document.getElementById('modalSuccessClose');
     const openTriggers = document.querySelectorAll('.js-open-register');
+    const messageInput = document.getElementById('regMessage');
+    const submitBtn = document.getElementById('modalSubmitBtn');
+    const generalError = document.getElementById('modalGeneralError');
 
     const fields = {
       name: { input: document.getElementById('regName'), error: document.getElementById('errName') },
@@ -66,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const resetModal = () => {
       form.reset();
       Object.values(fields).forEach(f => setError(f, ''));
+      generalError.hidden = true;
       formView.hidden = false;
       successView.hidden = true;
     };
@@ -102,8 +123,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeModal();
     });
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      generalError.hidden = true;
 
       const nameVal = fields.name.input.value.trim();
       const phoneVal = fields.phone.input.value.trim();
@@ -138,8 +160,33 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      formView.hidden = true;
-      successView.hidden = false;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Đang gửi...';
+
+      try {
+        const supabase = await getSupabaseClient();
+        if (!supabase) throw new Error('Supabase chưa được cấu hình (xem js/supabase-config.js)');
+
+        const { error } = await supabase.from('registrations').insert({
+          full_name: nameVal,
+          phone: phoneVal,
+          email: emailVal,
+          message: messageInput.value.trim() || null,
+          source_page: location.pathname.split('/').pop() || 'index.html'
+        });
+
+        if (error) throw error;
+
+        formView.hidden = true;
+        successView.hidden = false;
+      } catch (err) {
+        console.error('Lỗi gửi đăng ký:', err);
+        generalError.hidden = false;
+        generalError.textContent = 'Có lỗi xảy ra, vui lòng thử lại hoặc liên hệ trực tiếp qua hotline (028) 1234 5678.';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Gửi yêu cầu';
+      }
     });
   }
 });

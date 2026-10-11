@@ -2,3 +2,6 @@
 Thumbs.db
 *.log
 screenshots/
+
+# Chứa mật khẩu database Supabase thật — không đưa lên Git
+SUPABASE.TEXT.txt
