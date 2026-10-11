@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ứng Dụng AI Đột Phá — Kỷ Nguyên</title>
+<meta name="description" content="Khóa học Ứng Dụng AI Đột Phá tại Kỷ Nguyên — làm chủ Claude AI, ChatGPT và các mô hình ngôn ngữ lớn (LLM) để tăng tốc công việc và học tập. 6 buổi, học phí 4.000.000đ.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="container nav__inner">
+    <a href="index.html" class="nav__logo">
+      <span class="nav__logo-mark">KN</span>
+      <span class="nav__logo-text">Kỷ Nguyên</span>
+    </a>
+
+    <nav class="nav__links" id="navLinks">
+      <a href="index.html#courses">Khóa học</a>
+      <a href="index.html#why">Vì sao chọn chúng tôi</a>
+      <a href="index.html#roadmap">Lộ trình</a>
+      <a href="index.html#testimonials">Học viên nói gì</a>
+      <a href="index.html#contact">Liên hệ</a>
+    </nav>
+
+    <div class="nav__actions">
+      <a href="index.html#contact" class="btn btn--ghost btn--sm">Đăng nhập</a>
+      <a href="#register" class="btn btn--primary btn--sm js-open-register">Đăng ký ngay</a>
+    </div>
+
+    <button class="nav__burger" id="navBurger" aria-label="Mở menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- COURSE BANNER -->
+  <section class="course-banner">
+    <div class="course-banner__grid" aria-hidden="true"></div>
+    <div class="course-banner__glow" aria-hidden="true"></div>
+
+    <div class="course-banner__device" aria-hidden="true">
+      <svg viewBox="0 0 520 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="60" y="20" width="400" height="250" rx="14" fill="#101a38" stroke="#3d53a0" stroke-width="2"/>
+        <rect x="78" y="38" width="364" height="190" rx="4" fill="#0a1226"/>
+        <path d="M100 190 L160 140 L205 170 L270 100 L330 150 L400 90" stroke="#5b86ff" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="100" cy="190" r="5" fill="#8eacff"/>
+        <circle cx="160" cy="140" r="5" fill="#8eacff"/>
+        <circle cx="205" cy="170" r="5" fill="#8eacff"/>
+        <circle cx="270" cy="100" r="5" fill="#8eacff"/>
+        <circle cx="330" cy="150" r="5" fill="#8eacff"/>
+        <circle cx="400" cy="90" r="5" fill="#8eacff"/>
+        <rect x="96" y="56" width="120" height="10" rx="3" fill="#2a3c74"/>
+        <rect x="96" y="74" width="80" height="10" rx="3" fill="#2a3c74"/>
+        <rect x="300" y="56" width="130" height="46" rx="8" fill="#1b2d5e" stroke="#3d53a0"/>
+        <text x="313" y="84" fill="#bdcdff" font-family="monospace" font-size="13">AI · LLM</text>
+        <path d="M30 270 h460 v12 a10 10 0 0 1 -10 10 H40 a10 10 0 0 1 -10 -10 Z" fill="#101a38" stroke="#3d53a0" stroke-width="2"/>
+        <rect x="235" y="268" width="50" height="6" rx="3" fill="#3d53a0"/>
+      </svg>
+    </div>
+
+    <div class="container course-banner__inner">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Trang chủ</a>
+        <span>/</span>
+        <a href="index.html#courses">Khóa học</a>
+        <span>/</span>
+        <span class="breadcrumb__current">Ứng dụng AI</span>
+      </nav>
+
+      <p class="eyebrow eyebrow--left">Khóa học Ứng dụng AI</p>
+      <h1 class="course-banner__title">Ứng Dụng AI Đột Phá</h1>
+      <p class="course-banner__subtitle">
+        Làm chủ Claude AI, ChatGPT và các mô hình ngôn ngữ lớn (LLM) để tăng tốc công việc,
+        học tập và sáng tạo nội dung — không cần nền tảng kỹ thuật.
+      </p>
+
+      <div class="course-banner__meta">
+        <span class="meta-pill"><strong>4.000.000đ</strong> học phí</span>
+        <span class="meta-pill"><strong>6 buổi</strong> · 3 tiếng/buổi</span>
+        <span class="meta-pill"><strong>Thứ 7 &amp; CN</strong> · 13:30–16:30</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- COURSE CONTENT -->
+  <section class="section course-detail">
+    <div class="container course-layout">
+
+      <!-- LEFT: MAIN CONTENT -->
+      <div class="course-main">
+
+        <article class="course-block">
+          <h2>Giới thiệu khóa học</h2>
+          <p>
+            AI không còn là công nghệ của tương lai — đó là công cụ bạn cần ngay hôm nay.
+            Khóa <strong>Ứng Dụng AI Đột Phá</strong> giúp bạn hiểu cách các mô hình ngôn ngữ lớn
+            (Large Language Model — LLM) như <strong>Claude AI</strong> và <strong>ChatGPT</strong>
+            hoạt động, và quan trọng hơn: cách khai thác chúng để làm việc nhanh hơn, học tập hiệu
+            quả hơn và giải quyết vấn đề thông minh hơn.
+          </p>
+          <p>
+            Khóa học tập trung 100% vào thực hành — không lý thuyết hàn lâm. Mỗi buổi học bạn sẽ
+            trực tiếp thao tác trên Claude AI, ChatGPT và các công cụ AI phổ biến, với các tình
+            huống thực tế trong công việc văn phòng, học tập và kinh doanh.
+          </p>
+        </article>
+
+        <article class="course-block">
+          <h2>Bạn sẽ học được gì</h2>
+          <ul class="check-grid">
+            <li><span class="check-icon">✓</span> Hiểu bản chất AI, LLM và sự khác biệt giữa các mô hình phổ biến</li>
+            <li><span class="check-icon">✓</span> Viết prompt hiệu quả (Prompt Engineering) để AI trả lời đúng ý</li>
+            <li><span class="check-icon">✓</span> Dùng Claude AI &amp; ChatGPT soạn thảo văn bản, email, báo cáo</li>
+            <li><span class="check-icon">✓</span> Ứng dụng AI xử lý dữ liệu, tóm tắt tài liệu, lên kế hoạch công việc</li>
+            <li><span class="check-icon">✓</span> Tạo nội dung, ý tưởng sáng tạo bằng AI cho học tập và kinh doanh</li>
+            <li><span class="check-icon">✓</span> Nhận biết giới hạn, rủi ro và sử dụng AI có trách nhiệm</li>
+          </ul>
+        </article>
+
+        <article class="course-block">
+          <h2>Nội dung khóa học</h2>
+          <p class="course-block__sub">6 buổi học · mỗi buổi 3 tiếng · Thứ 7 &amp; Chủ Nhật, 13:30–16:30</p>
+
+          <ol class="curriculum">
+            <li class="curriculum__item">
+              <span class="curriculum__num">Buổi 1</span>
+              <div>
+                <h3>Tổng quan về AI &amp; LLM</h3>
+                <p>AI là gì, Large Language Model hoạt động ra sao, điểm qua hệ sinh thái AI hiện nay: Claude AI, ChatGPT, Gemini.</p>
+              </div>
+            </li>
+            <li class="curriculum__item">
+              <span class="curriculum__num">Buổi 2</span>
+              <div>
+                <h3>Làm chủ Claude AI &amp; ChatGPT</h3>
+                <p>Làm quen giao diện, thiết lập cuộc hội thoại hiệu quả, nguyên tắc viết prompt cơ bản.</p>
+              </div>
+            </li>
+            <li class="curriculum__item">
+              <span class="curriculum__num">Buổi 3</span>
+              <div>
+                <h3>Kỹ thuật Prompt nâng cao</h3>
+                <p>Role prompting, few-shot, chuỗi suy luận (chain of thought) để AI trả lời chính xác và sâu hơn.</p>
+              </div>
+            </li>
+            <li class="curriculum__item">
+              <span class="curriculum__num">Buổi 4</span>
+              <div>
+                <h3>AI trong soạn thảo &amp; học tập</h3>
+                <p>Soạn email, báo cáo, tóm tắt tài liệu, hỗ trợ ôn tập và viết luận bằng AI.</p>
+              </div>
+            </li>
+            <li class="curriculum__item">
+              <span class="curriculum__num">Buổi 5</span>
+              <div>
+                <h3>AI trong công việc &amp; kinh doanh</h3>
+                <p>Xử lý dữ liệu, lên kế hoạch, tạo nội dung marketing, ý tưởng kinh doanh cùng AI.</p>
+              </div>
+            </li>
+            <li class="curriculum__item">
+              <span class="curriculum__num">Buổi 6</span>
+              <div>
+                <h3>Dự án thực hành &amp; tổng kết</h3>
+                <p>Áp dụng toàn bộ kỹ năng vào một dự án cá nhân, nhận xét từ giảng viên và cấp chứng nhận.</p>
+              </div>
+            </li>
+          </ol>
+        </article>
+
+        <article class="course-block">
+          <h2>Đối tượng phù hợp</h2>
+          <ul class="card__meta course-block__list">
+            <li>Người đi làm muốn tăng năng suất với AI, không cần biết lập trình</li>
+            <li>Sinh viên, học sinh muốn ứng dụng AI vào học tập hiệu quả hơn</li>
+            <li>Chủ doanh nghiệp nhỏ, freelancer muốn tiết kiệm thời gian với AI</li>
+            <li>Bất kỳ ai tò mò và muốn bắt kịp xu hướng công nghệ AI</li>
+          </ul>
+        </article>
+
+        <article class="course-block instructor-card">
+          <div class="instructor-card__avatar">GV</div>
+          <div>
+            <h3>Giảng viên phụ trách</h3>
+            <p class="instructor-card__name">ThS. Lê Anh Dũng</p>
+            <p>5+ năm kinh nghiệm ứng dụng AI trong vận hành doanh nghiệp, trực tiếp đào tạo hơn 300 học viên tại Kỷ Nguyên.</p>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- RIGHT: SIDEBAR -->
+      <aside class="course-sidebar" id="register">
+        <div class="price-card">
+          <span class="price-card__label">Học phí khóa học</span>
+          <span class="price-card__value">4.000.000<span class="text-accent">đ</span></span>
+
+          <ul class="price-card__facts">
+            <li><span>Thời lượng</span><strong>6 buổi · 3 tiếng/buổi</strong></li>
+            <li><span>Lịch học</span><strong>Thứ 7 &amp; CN</strong></li>
+            <li><span>Giờ học</span><strong>13:30 – 16:30</strong></li>
+            <li><span>Hình thức</span><strong>Tại trung tâm</strong></li>
+          </ul>
+
+          <a href="index.html#contact" class="btn btn--primary btn--lg price-card__cta js-open-register">Đăng ký ngay</a>
+          <a href="index.html#contact" class="btn btn--ghost btn--lg price-card__cta">Tư vấn qua Zalo</a>
+        </div>
+
+        <div class="social-widget">
+          <span class="social-widget__label">Theo dõi Kỷ Nguyên</span>
+          <div class="social-widget__row">
+            <a href="#" class="social-btn" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h2.5l.4-3H14V4.4c0-.9.3-1.4 1.6-1.4H17V.1C16.6 0 15.6 0 14.5 0 12.2 0 10.6 1.4 10.6 4v2H8v3h2.6v9h3.4V9Z"/></svg>
+              <span>Facebook</span>
+            </a>
+            <a href="#" class="social-btn" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 7.5c0-1.7-1.3-3-3-3-2.4-.2-4.9-.2-7-.2s-4.6 0-7 .2c-1.7 0-3 1.4-3 3C1.8 9.2 1.8 11 1.8 12.8s0 3.6.2 5.3c0 1.7 1.3 3 3 3 2.4.2 4.9.2 7 .2s4.6 0 7-.2c1.7 0 3-1.3 3-3 .2-1.7.2-3.5.2-5.3s0-3.6-.2-5.3ZM9.7 16.3V9.3l6 3.5-6 3.5Z"/></svg>
+              <span>YouTube</span>
+            </a>
+            <a href="#" class="social-btn" aria-label="TikTok">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.8a4.3 4.3 0 0 1-3-1.3V14a5.3 5.3 0 1 1-4.6-5.2v2.6a2.7 2.7 0 1 0 2.1 2.6V0h2.6a4.3 4.3 0 0 0 3.9 4.2v1.6Z"/></svg>
+              <span>TikTok</span>
+            </a>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section cta">
+    <div class="container cta__inner">
+      <div class="cta__glow" aria-hidden="true"></div>
+      <h2>Sẵn sàng làm chủ AI cùng Kỷ Nguyên?</h2>
+      <p>Số lượng học viên mỗi lớp có giới hạn để đảm bảo chất lượng thực hành — đăng ký sớm để giữ chỗ.</p>
+      <a href="index.html#contact" class="btn btn--primary btn--lg js-open-register">Đăng ký tư vấn miễn phí</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <a href="index.html" class="nav__logo">
+        <span class="nav__logo-mark">KN</span>
+        <span class="nav__logo-text">Kỷ Nguyên</span>
+      </a>
+      <p>Trung tâm Tin học Kỷ Nguyên — đào tạo MOS, Lập trình Java và Ứng dụng AI theo hướng thực hành.</p>
+      <div class="footer__social">
+        <a href="#" aria-label="Facebook">f</a>
+        <a href="#" aria-label="YouTube">▶</a>
+        <a href="#" aria-label="Zalo">Z</a>
+      </div>
+    </div>
+
+    <div class="footer__col">
+      <h4>Khóa học</h4>
+      <a href="index.html#courses">MOS</a>
+      <a href="index.html#courses">Lập trình Java</a>
+      <a href="course-ai.html">Ứng dụng AI</a>
+    </div>
+
+    <div class="footer__col">
+      <h4>Về Kỷ Nguyên</h4>
+      <a href="index.html#why">Vì sao chọn chúng tôi</a>
+      <a href="index.html#roadmap">Lộ trình học</a>
+      <a href="index.html#testimonials">Học viên nói gì</a>
+    </div>
+
+    <div class="footer__col">
+      <h4>Liên hệ</h4>
+      <p>123 Đường Nguyễn Trãi, Q.1, TP.HCM</p>
+      <p>(028) 1234 5678</p>
+      <p>info@kynguyen.edu.vn</p>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="container footer__bottom-inner">
+      <span>© 2026 Trung tâm Tin học Kỷ Nguyên. Đã đăng ký bản quyền.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- REGISTER / CONSULTATION MODAL -->
+<div class="modal-overlay" id="registerModal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="registerModalTitle">
+    <button type="button" class="modal__close" id="modalClose" aria-label="Đóng">&times;</button>
+
+    <div class="modal__body" id="modalFormView">
+      <h3 id="registerModalTitle">Đăng ký tư vấn miễn phí</h3>
+      <p class="modal__sub">Để lại thông tin, Kỷ Nguyên sẽ liên hệ tư vấn lộ trình học phù hợp cho bạn.</p>
+
+      <form id="registerForm" novalidate>
+        <div class="field">
+          <label for="regName">Họ và tên</label>
+          <input type="text" id="regName" name="name" placeholder="Nguyễn Văn A" autocomplete="name">
+          <span class="field__error" id="errName"></span>
+        </div>
+        <div class="field">
+          <label for="regPhone">Số điện thoại</label>
+          <input type="tel" id="regPhone" name="phone" placeholder="09xxxxxxxx" autocomplete="tel">
+          <span class="field__error" id="errPhone"></span>
+        </div>
+        <div class="field">
+          <label for="regEmail">Email</label>
+          <input type="email" id="regEmail" name="email" placeholder="ban@email.com" autocomplete="email">
+          <span class="field__error" id="errEmail"></span>
+        </div>
+        <div class="field">
+          <label for="regMessage">Nội dung cần tư vấn</label>
+          <textarea id="regMessage" name="message" rows="3" placeholder="Bạn muốn tư vấn về khóa học nào? (không bắt buộc)"></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary btn--lg modal__submit">Gửi yêu cầu</button>
+      </form>
+    </div>
+
+    <div class="modal__success" id="modalSuccessView" hidden>
+      <div class="modal__success-icon">✓</div>
+      <h3>Cảm ơn bạn!</h3>
+      <p>Thông tin của bạn đã được ghi nhận.</p>
+      <button type="button" class="btn btn--ghost btn--lg" id="modalSuccessClose">Đóng</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
