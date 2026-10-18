@@ -968,6 +968,74 @@ svg { width: 22px; height: 22px; }
   .chatbot__panel { width: calc(100vw - 28px); height: calc(100vh - 120px); }
 }
 
+/* ===== Admin page ===== */
+.admin-page { min-height: 100vh; display: flex; flex-direction: column; }
+
+.admin-login {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.admin-login[hidden] { display: none; }
+.admin-login__card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: 34px 30px;
+}
+.admin-login__card h1 { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+.admin-login__card p.admin-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; }
+.admin-login__card .field input { width: 100%; }
+.admin-login__card .btn { width: 100%; margin-top: 6px; }
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 28px;
+  border-bottom: 1px solid var(--border);
+}
+.admin-header__user { font-size: 13.5px; color: var(--text-muted); }
+.admin-header__actions { display: flex; align-items: center; gap: 14px; }
+
+.admin-main { flex: 1; padding: 28px; overflow-x: auto; }
+.admin-main__bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.admin-main__bar h2 { font-size: 18px; font-weight: 700; }
+.admin-main__bar span { font-size: 13px; color: var(--text-faint); }
+
+.admin-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 820px; }
+.admin-table th {
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-strong);
+  color: var(--text-faint);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+.admin-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.admin-table__msg { max-width: 260px; color: var(--text-muted); }
+.admin-table__loading { text-align: center; padding: 30px; color: var(--text-faint); }
+
+.admin-delete-btn {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #ff8080;
+  border: 1px solid rgba(255,92,92,0.3);
+  border-radius: 999px;
+  padding: 5px 12px;
+  transition: background .2s var(--ease);
+}
+.admin-delete-btn:hover { background: rgba(255,92,92,0.1); }
+.admin-delete-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+.admin-empty, .admin-error { text-align: center; padding: 30px; color: var(--text-faint); font-size: 14px; }
+.admin-error { color: #ff8080; }
+
 /* ===== Responsive ===== */
 @media (max-width: 960px) {
   .nav__links {

@@ -122,6 +122,16 @@ Góc dưới-phải mỗi trang có widget chat nổi ([js/chatbot.js](js/chatbo
 - **Nội dung học phí/lịch học khóa Java hiện là số dựng** (6.000.000đ, 12 tuần/24 buổi, giảng viên "Thầy Nguyễn Hoàng Phúc") vì chưa có số liệu thật — cần thay bằng thông tin thật trước khi public site.
 - Favicon dùng chung: [assets/images/favicon.svg](assets/images/favicon.svg). Ảnh OG (chia sẻ Facebook/Zalo) dùng chung: [assets/images/course-ai-banner.jpg](assets/images/course-ai-banner.jpg) — ảnh thật của trung tâm.
 
+## 4e. Trang quản trị — admin.html
+
+[admin.html](admin.html) + [js/admin.js](js/admin.js) — xem/xoá danh sách đăng ký tư vấn (bảng `registrations`), yêu cầu đăng nhập qua **Supabase Auth** (khác với publishable key dùng cho form đăng ký công khai).
+
+- Tài khoản admin được tạo thủ công trong Supabase Dashboard (Authentication → Users), KHÔNG có chức năng tự đăng ký trên trang — đây là chủ đích, tránh người lạ tự tạo tài khoản admin.
+- Quyền đọc/xoá được cấp qua [supabase/admin_policies.sql](supabase/admin_policies.sql) (`to authenticated`, tách biệt với policy `to public` chỉ cho insert ở [supabase/schema.sql](supabase/schema.sql)) — phải chạy cả 2 file SQL thì trang mới hoạt động đủ.
+- `admin.html` có `<meta name="robots" content="noindex, nofollow">` và không được link từ nav/footer của các trang khác — chỉ truy cập được nếu biết URL trực tiếp. Đây KHÔNG phải bảo mật thật sự (chỉ ẩn khỏi index công cụ tìm kiếm); bảo mật dữ liệu nằm ở RLS + yêu cầu đăng nhập.
+- Dùng chung `js/supabase-config.js` (cùng URL/key với form đăng ký) và cùng quy ước dynamic `import()` thay vì `type="module"` như mục 4b — không đổi.
+- `admin-login` và `admin-dashboard` toggle qua thuộc tính `hidden` — đã thêm sẵn rule `.admin-login[hidden] { display: none; }` để tránh lặp lại lỗi CSS specificity đã ghi ở mục 4c.
+
 ## 5. Nguyên tắc làm việc
 
 - Giữ code HTML/CSS/JS gọn, không thêm thư viện/dependency nếu không cần thiết.

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quản trị — Kỷ Nguyên</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="admin-page">
+
+  <!-- LOGIN VIEW -->
+  <div class="admin-login" id="adminLoginView">
+    <div class="admin-login__card">
+      <h1>Quản trị Kỷ Nguyên</h1>
+      <p class="admin-sub">Đăng nhập để xem danh sách đăng ký tư vấn.</p>
+
+      <form id="adminLoginForm" novalidate>
+        <div class="field">
+          <label for="adminEmail">Email</label>
+          <input type="email" id="adminEmail" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="adminPassword">Mật khẩu</label>
+          <input type="password" id="adminPassword" autocomplete="current-password" required>
+        </div>
+        <span class="field__error" id="adminLoginError"></span>
+        <button type="submit" class="btn btn--primary btn--lg" id="adminLoginBtn">Đăng nhập</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- DASHBOARD VIEW -->
+  <div id="adminDashView" hidden>
+    <header class="admin-header">
+      <a href="index.html" class="nav__logo">
+        <span class="nav__logo-mark">KN</span>
+        <span class="nav__logo-text">Kỷ Nguyên — Quản trị</span>
+      </a>
+      <div class="admin-header__actions">
+        <span class="admin-header__user" id="adminUserEmail"></span>
+        <button type="button" class="btn btn--ghost btn--sm" id="adminLogoutBtn">Đăng xuất</button>
+      </div>
+    </header>
+
+    <main class="admin-main">
+      <div class="admin-main__bar">
+        <h2>Danh sách đăng ký tư vấn</h2>
+        <div style="display:flex; align-items:center; gap:14px;">
+          <span id="adminRowCount"></span>
+          <button type="button" class="btn btn--ghost btn--sm" id="adminRefreshBtn">Tải lại</button>
+        </div>
+      </div>
+
+      <p class="admin-error" id="adminLoadError" hidden></p>
+      <p class="admin-empty" id="adminEmptyState" hidden>Chưa có đăng ký nào.</p>
+
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Họ tên</th>
+            <th>SĐT</th>
+            <th>Email</th>
+            <th>Nội dung</th>
+            <th>Trang</th>
+            <th>Thời gian</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="adminTableBody"></tbody>
+      </table>
+    </main>
+  </div>
+
+</div>
+
+<script src="js/supabase-config.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
