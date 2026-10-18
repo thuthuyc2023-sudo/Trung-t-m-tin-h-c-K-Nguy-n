@@ -69,9 +69,17 @@ Nội dung động — khác bảng trên, **public đọc được trực tiế
 - → Đáp ứng đủ 3 thao tác **insert / update / delete** trên database qua giao diện thật (không chỉ qua Supabase Dashboard).
 - `admin.html` có `<meta name="robots" content="noindex, nofollow">`, không link từ nav/footer công khai — bảo mật thật nằm ở RLS + yêu cầu đăng nhập, không phải việc ẩn URL.
 
-## 7. Nguyên tắc & ràng buộc
+## 7. Logo thương hiệu
+
+Thương hiệu **Kỷ Nguyên là hư cấu** (không phải cơ sở có thật) — theo đúng yêu cầu "thương hiệu hư cấu phải tạo logo trước rồi mới dùng", logo được thiết kế qua một bước riêng:
+
+- 5 phương án được phác thảo và render để chọn: (A) chữ lồng "KN" dạng vuông, (B) biểu tượng mũ tốt nghiệp, (C) dấu ngoặc code `</>`, (D) chữ "K" cách điệu kết hợp node tròn (ẩn dụ kết nối/công nghệ), (E) chữ "KN" dạng tròn.
+- Đã chọn **phương án D** — biểu tượng chữ "K" cách điệu + node tròn, gradient xanh dương (`#3b6bff → #7a9bff`) khớp với màu accent của site.
+- File gốc: [assets/images/logo.svg](assets/images/logo.svg) (bản đầy đủ: icon + wordmark "Kỷ Nguyên") và [assets/images/favicon.svg](assets/images/favicon.svg) (bản icon-only cho favicon).
+- Dùng **nhất quán** ở mọi nơi: `.nav__logo-mark` (header + footer) trên cả 6 trang (`index.html`, `about.html`, `course-ai.html`, `mos-ai.html`, `java.html`, `admin.html`) và favicon trình duyệt — cùng 1 đoạn SVG, không có biến thể khác.
+
+## 8. Nguyên tắc & ràng buộc
 
 - Không tự thêm trang/section ngoài phạm vi (ví dụ trang thanh toán, hệ thống LMS quản lý điểm danh) trừ khi được yêu cầu — đây là site giới thiệu/tuyển sinh + quản trị lead cơ bản, không phải hệ thống quản lý học viên toàn diện.
-- Thương hiệu **Kỷ Nguyên là hư cấu** (không phải cơ sở có thật) — logo "KN" (badge gradient xanh) được tạo từ đầu dự án và dùng nhất quán ở mọi trang + favicon, theo đúng yêu cầu "thương hiệu hư cấu phải có logo tạo trước, dùng nhất quán".
 - **Không gắn ảnh thật của người thật vào nội dung đánh giá đang là dữ liệu mẫu/demo** — nguyên tắc tránh mạo danh, xem chi tiết ở `CLAUDE.md` mục nội dung động.
 - Một số nội dung còn là **dữ liệu mẫu cần thay trước khi dùng thật**: địa chỉ/SĐT/email ở footer, học phí khóa Java, link mạng xã hội (`href="#"`), 3 lịch khai giảng demo.
