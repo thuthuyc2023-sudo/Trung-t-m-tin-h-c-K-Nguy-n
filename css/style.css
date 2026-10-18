@@ -452,15 +452,23 @@ svg { width: 22px; height: 22px; }
 }
 .course-banner__device {
   position: absolute;
-  right: -40px; top: 50%;
+  right: 0; top: 50%;
   transform: translateY(-50%);
-  width: 560px;
+  width: clamp(240px, 30vw, 480px);
   opacity: 0.9;
   filter: drop-shadow(0 30px 60px rgba(0,0,0,.6));
   pointer-events: none;
+  transition: opacity .2s var(--ease);
 }
 .course-banner__device svg { width: 100%; height: 100%; display: block; }
-.course-banner__device--office { width: 620px; right: -60px; }
+.course-banner__device--office { width: clamp(260px, 32vw, 520px); }
+
+/* Dưới ngưỡng này, cột chữ (max-width 660px + padding) và ảnh minh họa
+   không còn đủ chỗ để không chồng lên nhau dù đã dùng clamp() — giảm
+   độ mờ để ảnh lùi thành hậu cảnh thay vì đè cứng lên chữ. */
+@media (max-width: 1240px) {
+  .course-banner__device { opacity: 0.22; }
+}
 .course-banner__inner { position: relative; max-width: 660px; }
 .course-banner__title {
   font-size: clamp(32px, 4.6vw, 50px);
@@ -922,7 +930,6 @@ svg { width: 22px; height: 22px; }
   .mock__side { display: none; }
   .course-layout { grid-template-columns: 1fr; }
   .course-sidebar { position: static; }
-  .course-banner__device { width: 420px; opacity: 0.5; }
 }
 
 @media (max-width: 640px) {
