@@ -365,7 +365,20 @@ svg { width: 22px; height: 22px; }
   display: flex; flex-direction: column; justify-content: space-between; gap: 22px;
 }
 .testimonial p { font-size: 15px; line-height: 1.65; color: var(--text); }
-.testimonial footer { display: flex; flex-direction: column; gap: 2px; }
+.testimonial footer { display: flex; align-items: center; gap: 12px; }
+.testimonial__avatar {
+  flex: none;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--accent), #7a9bff);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  overflow: hidden;
+}
+.testimonial__avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.testimonial__meta { display: flex; flex-direction: column; gap: 2px; }
 .testimonial__name { font-size: 14px; font-weight: 700; }
 .testimonial__role { font-size: 12.5px; color: var(--text-faint); }
 

@@ -11,7 +11,8 @@ create table if not exists testimonials (
   student_name text not null,
   student_role text,
   content text not null,
-  course text not null check (course in ('mos','java','ai'))
+  course text not null check (course in ('mos','java','ai')),
+  avatar_url text -- để trống = web tự hiển thị avatar chữ cái đầu tên, xem supabase/add_avatar_column.sql
 );
 
 alter table testimonials enable row level security;

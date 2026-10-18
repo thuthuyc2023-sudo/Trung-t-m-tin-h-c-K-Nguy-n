@@ -141,6 +141,7 @@ Khác với `registrations` (riêng tư, chỉ admin đọc được), 2 bảng 
 - **`class_schedules`**: mỗi dòng là 1 lớp sắp khai giảng (`course`, `start_date`, `total_slots`, `filled_slots`, `is_active`). `dynamic-content.js` tìm phần tử `[data-schedule="mos|java|ai"]` (hiện ở sidebar mỗi trang khóa học, phía trên price-card), lấy lớp **gần nhất còn active và start_date ≥ hôm nay**, hiển thị "Khai giảng gần nhất + còn bao nhiêu chỗ". Nếu không có lớp nào sắp tới, phần tử tự ẩn (`hidden`) — không hiện widget trống. Khi lớp đã đầy/đã qua ngày, tắt bằng nút "Đang mở/Đã đóng" trong admin (toggle `is_active`), không cần xoá để giữ lịch sử.
 - Cả 2 bảng đều dùng chung quy ước dynamic `import()` (không `type="module"`) như các file JS khác trong dự án.
 - Dữ liệu lịch khai giảng hiện tại (07/11, 14/11, 21/11/2026) là **ngày/số chỗ dựng tạm** để demo — sửa qua tab "Lịch khai giảng" trong admin khi có lịch thật.
+- **Avatar học viên**: cột `testimonials.avatar_url` (migration riêng: [supabase/add_avatar_column.sql](supabase/add_avatar_column.sql)) — để trống thì web tự vẽ avatar hình tròn gradient với chữ cái đầu tên (an toàn, không cần ảnh thật). **Nguyên tắc quan trọng: KHÔNG tự gắn ảnh thật của người thật vào các đánh giá đang là nội dung dựng (demo)** — 6 đánh giá hiện có (Nguyễn Thị Lan, Trần Minh Khoa...) là ví dụ minh hoạ, không phải học viên có thật. Chỉ điền `avatar_url` khi đó là ảnh thật của đúng người đã đưa ra đánh giá thật, có sự đồng ý của họ — nếu không rõ, để trống (initials) là lựa chọn an toàn mặc định.
 
 ## 5. Nguyên tắc làm việc
 

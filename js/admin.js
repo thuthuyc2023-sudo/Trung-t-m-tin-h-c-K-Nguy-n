@@ -194,8 +194,11 @@
       tbody.innerHTML = '';
       data.forEach(row => {
         const tr = document.createElement('tr');
+        const avatarCell = row.avatar_url
+          ? '<img src="' + escHtml(row.avatar_url) + '" alt="" style="width:28px;height:28px;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:8px;">'
+          : '';
         tr.innerHTML =
-          '<td>' + escHtml(row.student_name) + '</td>' +
+          '<td>' + avatarCell + escHtml(row.student_name) + '</td>' +
           '<td>' + escHtml(row.student_role || '—') + '</td>' +
           '<td>' + (COURSE_LABEL[row.course] || row.course) + '</td>' +
           '<td class="admin-table__msg">' + escHtml(row.content) + '</td>' +
@@ -218,6 +221,7 @@
       const role = document.getElementById('tRole').value.trim();
       const course = document.getElementById('tCourse').value;
       const content = document.getElementById('tContent').value.trim();
+      const avatarUrl = document.getElementById('tAvatar').value.trim();
       if (!name || !content) {
         errorEl.textContent = 'Vui lòng nhập tên và nội dung đánh giá.';
         return;
@@ -225,7 +229,8 @@
       saveBtn.disabled = true;
       saveBtn.textContent = 'Đang lưu...';
       const { error } = await client.from('testimonials').insert({
-        student_name: name, student_role: role || null, course, content
+        student_name: name, student_role: role || null, course, content,
+        avatar_url: avatarUrl || null
       });
       saveBtn.disabled = false;
       saveBtn.textContent = 'Lưu đánh giá';

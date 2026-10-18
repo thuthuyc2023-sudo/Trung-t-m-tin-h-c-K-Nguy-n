@@ -40,13 +40,24 @@
       return;
     }
 
-    container.innerHTML = data.map(t => (
-      '<blockquote class="testimonial">' +
-        '<p>&ldquo;' + esc(t.content) + '&rdquo;</p>' +
-        '<footer><span class="testimonial__name">' + esc(t.student_name) + '</span>' +
-        '<span class="testimonial__role">' + esc(t.student_role || '') + '</span></footer>' +
-      '</blockquote>'
-    )).join('');
+    container.innerHTML = data.map(t => {
+      const initial = (t.student_name || '?').trim().charAt(0).toUpperCase();
+      const avatar = t.avatar_url
+        ? '<img src="' + esc(t.avatar_url) + '" alt="" loading="lazy">'
+        : initial;
+      return (
+        '<blockquote class="testimonial">' +
+          '<p>&ldquo;' + esc(t.content) + '&rdquo;</p>' +
+          '<footer>' +
+            '<span class="testimonial__avatar">' + avatar + '</span>' +
+            '<span class="testimonial__meta">' +
+              '<span class="testimonial__name">' + esc(t.student_name) + '</span>' +
+              '<span class="testimonial__role">' + esc(t.student_role || '') + '</span>' +
+            '</span>' +
+          '</footer>' +
+        '</blockquote>'
+      );
+    }).join('');
   }
 
   async function renderSchedule(container, course) {
