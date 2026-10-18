@@ -95,6 +95,17 @@ Form "Đăng ký tư vấn" (modal mở từ các nút CTA) lưu dữ liệu và
 - **Quan trọng:** `js/main.js` KHÔNG dùng `<script type="module">` và không dùng `import` tĩnh ở đầu file — cố tình, vì ES module bị trình duyệt chặn tải khi mở trang bằng `file://` (double-click file HTML), sẽ làm hỏng toàn bộ JS của trang. Supabase client được nạp bằng **dynamic `import()`** (gọi hàm, không phải khai báo module) ngay trong submit handler — cách này tải được module từ CDN kể cả khi trang đang mở qua `file://`. Khi sửa `main.js`, giữ nguyên quy ước này; không chuyển sang `type="module"`.
 - Nếu `SUPABASE_URL`/`SUPABASE_ANON_KEY` chưa được điền (còn giá trị `YOUR_SUPABASE_...`), form sẽ hiện thông báo lỗi thân thiện thay vì báo "thành công" giả.
 
+## 4c. Chatbot widget (AI trợ lý, key do người dùng tự nhập)
+
+Góc dưới-phải mỗi trang có widget chat nổi ([js/chatbot.js](js/chatbot.js), CSS trong `style.css` mục "Chatbot widget"):
+
+- Người dùng tự nhập API Key của **Google Gemini** hoặc **Groq** vào khung cài đặt trong widget.
+- Key chỉ lưu trong `localStorage` của trình duyệt (`kynguyen_chatbot_config`) — **không có server nào của Kỷ Nguyên nhận được key này**. Khi chat, trình duyệt gọi `fetch()` thẳng tới API của Gemini/Groq, không qua trung gian.
+- Luôn hiển thị cảnh báo: người dùng tự chịu trách nhiệm bảo mật key và chi phí phát sinh.
+- Có nút "Xóa API Key" xóa khỏi `localStorage` và quay lại màn hình cài đặt.
+- Dùng `fetch()` thuần, không có SDK/thư viện ngoài nào — vì vậy không cần `import`/module, không vi phạm quy ước "main.js không phải ES module" ở mục 4b.
+- **Lưu ý CSS quan trọng:** các view con (`.chatbot__settings`, `.chatbot__chat`) dùng thuộc tính HTML `hidden` để ẩn/hiện, nhưng class CSS của chúng có đặt `display: flex`, nên bắt buộc phải có rule `.chatbot__settings[hidden], .chatbot__chat[hidden] { display: none; }` đè lên — nếu thiếu rule này, 2 view sẽ hiển thị chồng lên nhau. Khi thêm view/toggle tương tự (ở đây hoặc nơi khác), luôn kiểm tra specificity này.
+
 ## 5. Nguyên tắc làm việc
 
 - Giữ code HTML/CSS/JS gọn, không thêm thư viện/dependency nếu không cần thiết.
