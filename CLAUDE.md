@@ -110,6 +110,18 @@ Góc dưới-phải mỗi trang có widget chat nổi ([js/chatbot.js](js/chatbo
 - Không dùng SDK/thư viện ngoài, không `fetch()` ra ngoài — vì vậy không vi phạm quy ước "main.js không phải ES module" ở mục 4b (không liên quan tới chatbot.js nhưng cùng nguyên tắc chung của dự án: không cần module).
 - **Lưu ý CSS:** nếu sau này thêm lại view dạng ẩn/hiện bằng thuộc tính HTML `hidden`, nhớ kiểm tra: nếu class CSS của view đó có đặt `display: flex/grid/block`, nó sẽ ĐÈ lên `hidden` (specificity cao hơn UA stylesheet) khiến view hiện ra dù có `hidden` — phải thêm rule `.ten-class[hidden] { display: none; }` để sửa. Đây là lỗi thực tế đã gặp ở bản API-key trước đó.
 
+## 4d. Ba trang khóa học — khuôn mẫu dùng chung
+
+[course-ai.html](course-ai.html) (Ứng dụng AI), [mos-ai.html](mos-ai.html) (MOS), [java.html](java.html) (Lập trình Java) **phải giữ cùng một cấu trúc**: banner (breadcrumb + eyebrow + title + subtitle + meta-pill) → `course-layout` (nội dung trái + sidebar phải: price-card + social-widget) → section `trust-strip` (3 stat + 2 testimonial + FAQ accordion, xem bên dưới) → CTA → footer/modal/chatbot giống hệt nhau. Khi sửa 1 trang (ví dụ thêm section, đổi style), **rà cả 3 trang** để không bị lệch — đã từng xảy ra lệch (chỉ 2/3 trang có giảng viên, chỉ 1/3 trang có ảnh thật, footer link sai) và phải sửa lại.
+
+- **`trust-strip`**: dùng `<details class="faq-item"><summary>...</summary><p>...</p></details>` thuần HTML cho accordion — không cần JS. Số liệu thống kê (stat) ở mỗi trang phải khớp với số học viên giảng viên tự nhận ở phần trên (xem mục dưới) — tránh lặp lại lỗi số liệu mâu thuẫn giữa trang chủ (1.000+ tổng) và từng trang con (MOS 400+, AI 300+, Java 250+).
+- **Mạng xã hội**: thống nhất Facebook / YouTube / TikTok ở mọi nơi (footer lẫn social-widget sidebar) — trước đây footer dùng Zalo còn sidebar dùng TikTok, không khớp nhau.
+- **Email liên hệ**: dùng `info@kynguyen.vn`, KHÔNG dùng đuôi `.edu.vn` — domain này ở VN chỉ cấp cho cơ sở giáo dục được công nhận chính thức, trung tâm tư nhân dùng dễ gây hiểu nhầm.
+- Footer mục "Khóa học" ở cả 3 trang phải trỏ thẳng `mos-ai.html` / `java.html` / `course-ai.html`, không trỏ `index.html#courses` (anchor đó chỉ hợp lý khi đang đứng từ index.html).
+- `js/chatbot.js` có mục FAQ `id:'java'` trỏ `link.href: 'java.html'` — nếu đổi tên/xoá file java.html phải sửa theo.
+- **Nội dung học phí/lịch học khóa Java hiện là số dựng** (6.000.000đ, 12 tuần/24 buổi, giảng viên "Thầy Nguyễn Hoàng Phúc") vì chưa có số liệu thật — cần thay bằng thông tin thật trước khi public site.
+- Favicon dùng chung: [assets/images/favicon.svg](assets/images/favicon.svg). Ảnh OG (chia sẻ Facebook/Zalo) dùng chung: [assets/images/course-ai-banner.jpg](assets/images/course-ai-banner.jpg) — ảnh thật của trung tâm.
+
 ## 5. Nguyên tắc làm việc
 
 - Giữ code HTML/CSS/JS gọn, không thêm thư viện/dependency nếu không cần thiết.

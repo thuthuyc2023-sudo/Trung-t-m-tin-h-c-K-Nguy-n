@@ -643,6 +643,55 @@ svg { width: 22px; height: 22px; }
 .social-btn svg { width: 18px; height: 18px; }
 .social-btn:hover { border-color: var(--accent-light); color: var(--text); background: rgba(255,255,255,0.03); }
 
+/* ===== Course trust strip (stats + testimonials + FAQ) ===== */
+.trust-strip { background: var(--bg-elevated); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+.trust-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  text-align: center;
+  padding: 44px 0;
+  border-bottom: 1px solid var(--border);
+}
+.trust-stats .stat { border-left: 1px solid var(--border); padding: 0 16px; }
+.trust-stats .stat:first-child { border-left: none; }
+
+.trust-testimonials { padding: 56px 0; border-bottom: 1px solid var(--border); }
+.trust-testimonials .section__title { font-size: 24px; margin-bottom: 36px; }
+
+.trust-faq { padding: 56px 0; }
+.trust-faq .section__title { font-size: 24px; margin-bottom: 28px; }
+
+.faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.faq-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 4px 20px;
+}
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 16px 0;
+  font-weight: 600;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: "+";
+  flex: none;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--accent-light);
+  transition: transform .2s var(--ease);
+}
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item p { padding: 0 0 18px; color: var(--text-muted); font-size: 14.5px; line-height: 1.65; }
+
 /* ===== Register modal ===== */
 .modal-overlay {
   position: fixed;
@@ -954,5 +1003,8 @@ svg { width: 22px; height: 22px; }
   .mock__row { grid-template-columns: 1fr; }
   .course-banner { padding: 120px 0 50px; }
   .check-grid { grid-template-columns: 1fr; }
+  .trust-stats { grid-template-columns: 1fr; gap: 20px; }
+  .trust-stats .stat { border-left: none; border-top: 1px solid var(--border); padding-top: 16px; }
+  .trust-stats .stat:first-child { border-top: none; }
   .curriculum__item { gap: 14px; }
 }

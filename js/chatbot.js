@@ -16,8 +16,8 @@
       id: 'java',
       label: 'Khóa học Java',
       keywords: ['java', 'lap trinh', 'lap trinh vien', 'code', 'oop'],
-      answer: 'Khóa Lập trình Java học nền tảng lập trình, OOP, cấu trúc dữ liệu và thực hành theo dự án thật, kéo dài 12 tuần. Học viên có portfolio cá nhân khi tốt nghiệp.\n\nĐăng ký tư vấn để biết lịch khai giảng gần nhất và học phí chi tiết nhé!',
-      link: { href: 'index.html#courses', text: 'Xem khóa Java →' }
+      answer: 'Khóa Lập trình Java học nền tảng lập trình, OOP, cấu trúc dữ liệu và thực hành theo dự án thật, kéo dài 12 tuần.\n\n💰 Học phí: 6.000.000đ\n🗓 Lịch học: 12 tuần (24 buổi) · Thứ 7 & CN · 13:30–16:30',
+      link: { href: 'java.html', text: 'Xem chi tiết khóa Java →' }
     },
     {
       id: 'ai',
