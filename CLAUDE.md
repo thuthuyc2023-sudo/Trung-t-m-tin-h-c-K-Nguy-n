@@ -95,16 +95,20 @@ Form "Đăng ký tư vấn" (modal mở từ các nút CTA) lưu dữ liệu và
 - **Quan trọng:** `js/main.js` KHÔNG dùng `<script type="module">` và không dùng `import` tĩnh ở đầu file — cố tình, vì ES module bị trình duyệt chặn tải khi mở trang bằng `file://` (double-click file HTML), sẽ làm hỏng toàn bộ JS của trang. Supabase client được nạp bằng **dynamic `import()`** (gọi hàm, không phải khai báo module) ngay trong submit handler — cách này tải được module từ CDN kể cả khi trang đang mở qua `file://`. Khi sửa `main.js`, giữ nguyên quy ước này; không chuyển sang `type="module"`.
 - Nếu `SUPABASE_URL`/`SUPABASE_ANON_KEY` chưa được điền (còn giá trị `YOUR_SUPABASE_...`), form sẽ hiện thông báo lỗi thân thiện thay vì báo "thành công" giả.
 
-## 4c. Chatbot widget (AI trợ lý, key do người dùng tự nhập)
+## 4c. Chatbot widget (FAQ trả lời sẵn, không dùng AI thật)
 
-Góc dưới-phải mỗi trang có widget chat nổi ([js/chatbot.js](js/chatbot.js), CSS trong `style.css` mục "Chatbot widget"):
+Góc dưới-phải mỗi trang có widget chat nổi ([js/chatbot.js](js/chatbot.js), CSS trong `style.css` mục "Chatbot widget").
 
-- Người dùng tự nhập API Key của **Google Gemini** hoặc **Groq** vào khung cài đặt trong widget.
-- Key chỉ lưu trong `localStorage` của trình duyệt (`kynguyen_chatbot_config`) — **không có server nào của Kỷ Nguyên nhận được key này**. Khi chat, trình duyệt gọi `fetch()` thẳng tới API của Gemini/Groq, không qua trung gian.
-- Luôn hiển thị cảnh báo: người dùng tự chịu trách nhiệm bảo mật key và chi phí phát sinh.
-- Có nút "Xóa API Key" xóa khỏi `localStorage` và quay lại màn hình cài đặt.
-- Dùng `fetch()` thuần, không có SDK/thư viện ngoài nào — vì vậy không cần `import`/module, không vi phạm quy ước "main.js không phải ES module" ở mục 4b.
-- **Lưu ý CSS quan trọng:** các view con (`.chatbot__settings`, `.chatbot__chat`) dùng thuộc tính HTML `hidden` để ẩn/hiện, nhưng class CSS của chúng có đặt `display: flex`, nên bắt buộc phải có rule `.chatbot__settings[hidden], .chatbot__chat[hidden] { display: none; }` đè lên — nếu thiếu rule này, 2 view sẽ hiển thị chồng lên nhau. Khi thêm view/toggle tương tự (ở đây hoặc nơi khác), luôn kiểm tra specificity này.
+**Lịch sử quyết định:** bản đầu tiên cho người dùng tự nhập API Key (Gemini/Groq) để chat với AI thật. Sau đó đổi sang FAQ trả lời sẵn theo từ khóa vì đối tượng khách truy cập (phụ huynh, học viên phổ thông) không rành khái niệm "API Key" — yêu cầu họ tự đi xin key là rào cản quá lớn. Nếu sau này có backend thật, có thể cân nhắc lại phương án AI thật (nên giấu key ở server, không để lộ ở client).
+
+**Cách hoạt động hiện tại:**
+- Toàn bộ câu hỏi/trả lời nằm trong mảng `FAQ` ở đầu [js/chatbot.js](js/chatbot.js) — mỗi mục có `keywords` (không dấu, để so khớp) và `answer`. Thêm câu hỏi mới = thêm 1 object vào mảng này, không cần sửa logic.
+- So khớp bằng cách bỏ dấu tiếng Việt + so từ khóa xuất hiện trong câu hỏi (hàm `normalize`/`findFaq`), không gọi mạng, không cần key, không tốn phí.
+- Khi mở widget, bot chào + hiện các nút gợi ý nhanh (chip) cho câu hỏi phổ biến — ưu tiên bấm hơn gõ, phù hợp người không rành kỹ thuật.
+- Câu hỏi không khớp từ khóa nào → trả lời fallback + gợi ý lại các chip, kèm hướng dẫn bấm "Đăng ký tư vấn" nếu cần hỗ trợ trực tiếp.
+- Mục có `action: 'open-register'` sẽ chèn thêm nút "Đăng ký tư vấn ngay" bên dưới câu trả lời, bấm vào sẽ tự kích hoạt nút `.js-open-register` có sẵn trên trang (mở đúng modal đăng ký ở mục 4b) — không viết lại logic mở modal.
+- Không dùng SDK/thư viện ngoài, không `fetch()` ra ngoài — vì vậy không vi phạm quy ước "main.js không phải ES module" ở mục 4b (không liên quan tới chatbot.js nhưng cùng nguyên tắc chung của dự án: không cần module).
+- **Lưu ý CSS:** nếu sau này thêm lại view dạng ẩn/hiện bằng thuộc tính HTML `hidden`, nhớ kiểm tra: nếu class CSS của view đó có đặt `display: flex/grid/block`, nó sẽ ĐÈ lên `hidden` (specificity cao hơn UA stylesheet) khiến view hiện ra dù có `hidden` — phải thêm rule `.ten-class[hidden] { display: none; }` để sửa. Đây là lỗi thực tế đã gặp ở bản API-key trước đó.
 
 ## 5. Nguyên tắc làm việc
 

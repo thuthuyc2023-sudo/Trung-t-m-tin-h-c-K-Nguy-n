@@ -335,51 +335,24 @@
 
 <!-- CHATBOT WIDGET -->
 <div class="chatbot" id="chatbot">
-  <button type="button" class="chatbot__toggle" id="chatbotToggle" aria-label="Mở trợ lý AI">
+  <button type="button" class="chatbot__toggle" id="chatbotToggle" aria-label="Mở trợ lý">
     <svg class="icon-chat" viewBox="0 0 24 24" fill="none"><path d="M4 5h16v11H7l-3 3V5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
     <svg class="icon-close" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
   </button>
 
-  <div class="chatbot__panel" role="dialog" aria-label="Trợ lý AI">
+  <div class="chatbot__panel" role="dialog" aria-label="Trợ lý Kỷ Nguyên">
     <div class="chatbot__header">
-      <span>Trợ lý AI</span>
-      <div class="chatbot__header-actions">
-        <button type="button" class="chatbot__icon-btn" id="chatbotSettingsBtn" aria-label="Cài đặt API Key" title="Cài đặt API Key">⚙</button>
-        <button type="button" class="chatbot__icon-btn" id="chatbotCloseBtn" aria-label="Đóng">✕</button>
-      </div>
+      <span>Trợ lý Kỷ Nguyên</span>
+      <button type="button" class="chatbot__icon-btn" id="chatbotCloseBtn" aria-label="Đóng">✕</button>
     </div>
 
-    <!-- Settings view: nhập API Key -->
-    <div class="chatbot__settings" id="chatbotSettingsView">
-      <p class="chatbot__notice">
-        ⚠️ Bạn tự nhập API Key của riêng mình (Google Gemini hoặc Groq) để sử dụng trợ lý AI.
-        Key chỉ được lưu trong trình duyệt của bạn (localStorage) — <strong>không gửi về máy chủ của Kỷ Nguyên</strong>.
-        Mọi câu hỏi được gọi thẳng từ trình duyệt của bạn tới nhà cung cấp AI tương ứng.
-        <strong>Bạn tự chịu trách nhiệm về việc bảo mật API Key và mọi chi phí phát sinh</strong> từ nhà cung cấp.
-      </p>
-      <label for="chatbotProvider">Nhà cung cấp</label>
-      <select id="chatbotProvider">
-        <option value="gemini">Google Gemini</option>
-        <option value="groq">Groq</option>
-      </select>
-      <label for="chatbotApiKey">API Key</label>
-      <input type="password" id="chatbotApiKey" placeholder="Dán API Key của bạn vào đây" autocomplete="off">
-      <span class="chatbot__settings-error" id="chatbotSettingsError"></span>
-      <button type="button" class="btn btn--primary btn--sm chatbot__save-btn" id="chatbotSaveKey">Lưu &amp; bắt đầu chat</button>
-    </div>
-
-    <!-- Chat view -->
-    <div class="chatbot__chat" id="chatbotChatView" hidden>
+    <div class="chatbot__chat" id="chatbotChatView">
       <div class="chatbot__messages" id="chatbotMessages"></div>
       <div class="chatbot__composer">
-        <textarea id="chatbotInput" rows="1" placeholder="Nhập câu hỏi về khóa học..."></textarea>
+        <textarea id="chatbotInput" rows="1" placeholder="Nhập câu hỏi của bạn..."></textarea>
         <button type="button" class="chatbot__send" id="chatbotSend" aria-label="Gửi">
           <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M4 12 20 4l-7 16-2.5-7L4 12Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
         </button>
-      </div>
-      <div class="chatbot__connected">
-        <span id="chatbotProviderLabel"></span>
-        <button type="button" id="chatbotClearKey">Xóa API Key</button>
       </div>
     </div>
   </div>
