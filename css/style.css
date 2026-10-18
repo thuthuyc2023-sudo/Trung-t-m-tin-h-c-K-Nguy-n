@@ -414,6 +414,15 @@ svg { width: 22px; height: 22px; }
 .footer__col a, .footer__col p { display: block; font-size: 14px; color: var(--text-muted); margin-bottom: 10px; }
 .footer__col a:hover { color: var(--text); }
 
+.footer__map {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  margin-bottom: 44px;
+  filter: invert(90%) hue-rotate(180deg) brightness(.95) contrast(.9);
+}
+.footer__map iframe { display: block; width: 100%; }
+
 .footer__bottom { border-top: 1px solid var(--border); padding: 22px 0; }
 .footer__bottom-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: 13px; color: var(--text-faint); }
 
