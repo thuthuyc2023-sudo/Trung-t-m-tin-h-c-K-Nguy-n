@@ -213,6 +213,8 @@
 
       <!-- RIGHT: SIDEBAR -->
       <aside class="course-sidebar" id="register">
+        <div class="schedule-widget" data-schedule="java" hidden></div>
+
         <div class="price-card">
           <span class="price-card__label">Học phí khóa học</span>
           <span class="price-card__value">6.000.000<span class="text-accent">đ</span></span>
@@ -269,16 +271,7 @@
 
     <div class="container trust-testimonials">
       <h2 class="section__title">Học viên nói gì về khóa Java</h2>
-      <div class="grid grid--3 testimonial-grid" style="margin-top:0">
-        <blockquote class="testimonial">
-          <p>"Khóa Java ở Kỷ Nguyên tập trung thực hành dự án thật, nhờ vậy mình tự tin hơn hẳn khi phỏng vấn xin việc."</p>
-          <footer><span class="testimonial__name">Trần Minh Khoa</span><span class="testimonial__role">Sinh viên CNTT</span></footer>
-        </blockquote>
-        <blockquote class="testimonial">
-          <p>"Giảng viên giảng dễ hiểu, bài tập thực hành sát với phỏng vấn thực tế, mình tự tin hơn hẳn khi đi xin thực tập."</p>
-          <footer><span class="testimonial__name">Lê Thị Minh Thư</span><span class="testimonial__role">Sinh viên năm 3</span></footer>
-        </blockquote>
-      </div>
+      <div class="grid grid--3 testimonial-grid" style="margin-top:0" data-testimonials="java"></div>
     </div>
 
     <div class="container trust-faq">
@@ -430,6 +423,7 @@
 
 <script src="js/supabase-config.js"></script>
 <script src="js/main.js"></script>
+<script src="js/dynamic-content.js"></script>
 <script src="js/chatbot.js"></script>
 </body>
 </html>

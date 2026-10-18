@@ -131,6 +131,16 @@ Góc dưới-phải mỗi trang có widget chat nổi ([js/chatbot.js](js/chatbo
 - `admin.html` có `<meta name="robots" content="noindex, nofollow">` và không được link từ nav/footer của các trang khác — chỉ truy cập được nếu biết URL trực tiếp. Đây KHÔNG phải bảo mật thật sự (chỉ ẩn khỏi index công cụ tìm kiếm); bảo mật dữ liệu nằm ở RLS + yêu cầu đăng nhập.
 - Dùng chung `js/supabase-config.js` (cùng URL/key với form đăng ký) và cùng quy ước dynamic `import()` thay vì `type="module"` như mục 4b — không đổi.
 - `admin-login` và `admin-dashboard` toggle qua thuộc tính `hidden` — đã thêm sẵn rule `.admin-login[hidden] { display: none; }` để tránh lặp lại lỗi CSS specificity đã ghi ở mục 4c.
+- Trang quản trị có 3 tab: **Đăng ký tư vấn** (registrations), **Đánh giá học viên** (testimonials), **Lịch khai giảng** (class_schedules) — xem mục 4f để hiểu 2 bảng sau.
+
+## 4f. Nội dung động: đánh giá học viên &amp; lịch khai giảng
+
+Khác với `registrations` (riêng tư, chỉ admin đọc được), 2 bảng `testimonials` và `class_schedules` là **nội dung công khai** — khách vãng lai (role `public`, không cần đăng nhập) đọc được trực tiếp để hiển thị lên trang, chỉ việc thêm/sửa/xoá mới cần đăng nhập (`to authenticated`). Schema + policy: [supabase/content_tables.sql](supabase/content_tables.sql) (file này cũng seed sẵn dữ liệu đang hiển thị trên site, để chạy xong là có ngay nội dung, không bị trống trang).
+
+- **`testimonials`**: cột `course` nhận giá trị `'mos' | 'java' | 'ai'`. [js/dynamic-content.js](js/dynamic-content.js) tìm mọi phần tử có `data-testimonials="mos|java|ai"` (lọc theo khóa) hoặc `data-testimonials` không có giá trị (lấy tất cả — dùng ở trang chủ) và render vào đó bằng đúng markup `.testimonial` đã có sẵn CSS. **Không còn testimonial nào hardcode trong HTML nữa** — toàn bộ 3 trang khóa học + trang chủ đều lấy từ Supabase. Muốn thêm/xoá đánh giá → vào `admin.html` tab "Đánh giá học viên", không sửa trực tiếp HTML.
+- **`class_schedules`**: mỗi dòng là 1 lớp sắp khai giảng (`course`, `start_date`, `total_slots`, `filled_slots`, `is_active`). `dynamic-content.js` tìm phần tử `[data-schedule="mos|java|ai"]` (hiện ở sidebar mỗi trang khóa học, phía trên price-card), lấy lớp **gần nhất còn active và start_date ≥ hôm nay**, hiển thị "Khai giảng gần nhất + còn bao nhiêu chỗ". Nếu không có lớp nào sắp tới, phần tử tự ẩn (`hidden`) — không hiện widget trống. Khi lớp đã đầy/đã qua ngày, tắt bằng nút "Đang mở/Đã đóng" trong admin (toggle `is_active`), không cần xoá để giữ lịch sử.
+- Cả 2 bảng đều dùng chung quy ước dynamic `import()` (không `type="module"`) như các file JS khác trong dự án.
+- Dữ liệu lịch khai giảng hiện tại (07/11, 14/11, 21/11/2026) là **ngày/số chỗ dựng tạm** để demo — sửa qua tab "Lịch khai giảng" trong admin khi có lịch thật.
 
 ## 5. Nguyên tắc làm việc
 

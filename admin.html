@@ -50,31 +50,100 @@
     </header>
 
     <main class="admin-main">
-      <div class="admin-main__bar">
-        <h2>Danh sách đăng ký tư vấn</h2>
-        <div style="display:flex; align-items:center; gap:14px;">
-          <span id="adminRowCount"></span>
-          <button type="button" class="btn btn--ghost btn--sm" id="adminRefreshBtn">Tải lại</button>
-        </div>
+      <div class="admin-tabs">
+        <button type="button" class="admin-tab is-active" data-tab="panelRegistrations">Đăng ký tư vấn</button>
+        <button type="button" class="admin-tab" data-tab="panelTestimonials">Đánh giá học viên</button>
+        <button type="button" class="admin-tab" data-tab="panelSchedules">Lịch khai giảng</button>
       </div>
 
-      <p class="admin-error" id="adminLoadError" hidden></p>
-      <p class="admin-empty" id="adminEmptyState" hidden>Chưa có đăng ký nào.</p>
+      <!-- TAB: Đăng ký tư vấn -->
+      <section class="admin-panel" id="panelRegistrations">
+        <div class="admin-main__bar">
+          <h2>Danh sách đăng ký tư vấn</h2>
+          <div style="display:flex; align-items:center; gap:14px;">
+            <span id="adminRowCount"></span>
+            <button type="button" class="btn btn--ghost btn--sm" id="adminRefreshBtn">Tải lại</button>
+          </div>
+        </div>
 
-      <table class="admin-table">
-        <thead>
-          <tr>
-            <th>Họ tên</th>
-            <th>SĐT</th>
-            <th>Email</th>
-            <th>Nội dung</th>
-            <th>Trang</th>
-            <th>Thời gian</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody id="adminTableBody"></tbody>
-      </table>
+        <p class="admin-error" id="adminLoadError" hidden></p>
+        <p class="admin-empty" id="adminEmptyState" hidden>Chưa có đăng ký nào.</p>
+
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Họ tên</th>
+              <th>SĐT</th>
+              <th>Email</th>
+              <th>Nội dung</th>
+              <th>Trang</th>
+              <th>Thời gian</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="adminTableBody"></tbody>
+        </table>
+      </section>
+
+      <!-- TAB: Đánh giá học viên -->
+      <section class="admin-panel" id="panelTestimonials" hidden>
+        <div class="admin-main__bar">
+          <h2>Đánh giá học viên</h2>
+          <button type="button" class="btn btn--primary btn--sm" id="testimonialAddToggle">+ Thêm đánh giá</button>
+        </div>
+
+        <form id="testimonialForm" class="admin-inline-form" hidden>
+          <div class="admin-inline-form__row">
+            <input type="text" id="tName" placeholder="Tên học viên" required>
+            <input type="text" id="tRole" placeholder="Vai trò (VD: Sinh viên CNTT)">
+            <select id="tCourse">
+              <option value="mos">MOS</option>
+              <option value="java">Lập trình Java</option>
+              <option value="ai">Ứng dụng AI</option>
+            </select>
+          </div>
+          <textarea id="tContent" placeholder="Nội dung đánh giá" rows="2" required></textarea>
+          <span class="field__error" id="testimonialError"></span>
+          <button type="submit" class="btn btn--primary btn--sm" id="testimonialSaveBtn">Lưu đánh giá</button>
+        </form>
+
+        <table class="admin-table">
+          <thead>
+            <tr><th>Tên</th><th>Vai trò</th><th>Khóa</th><th>Nội dung</th><th></th></tr>
+          </thead>
+          <tbody id="testimonialTableBody"></tbody>
+        </table>
+      </section>
+
+      <!-- TAB: Lịch khai giảng -->
+      <section class="admin-panel" id="panelSchedules" hidden>
+        <div class="admin-main__bar">
+          <h2>Lịch khai giảng</h2>
+          <button type="button" class="btn btn--primary btn--sm" id="scheduleAddToggle">+ Thêm lịch</button>
+        </div>
+
+        <form id="scheduleForm" class="admin-inline-form" hidden>
+          <div class="admin-inline-form__row">
+            <select id="sCourse">
+              <option value="mos">MOS</option>
+              <option value="java">Lập trình Java</option>
+              <option value="ai">Ứng dụng AI</option>
+            </select>
+            <input type="date" id="sDate" required>
+            <input type="number" id="sTotal" placeholder="Tổng số chỗ" value="20" min="1">
+            <input type="number" id="sFilled" placeholder="Đã đăng ký" value="0" min="0">
+          </div>
+          <span class="field__error" id="scheduleError"></span>
+          <button type="submit" class="btn btn--primary btn--sm" id="scheduleSaveBtn">Lưu lịch khai giảng</button>
+        </form>
+
+        <table class="admin-table">
+          <thead>
+            <tr><th>Khóa</th><th>Ngày khai giảng</th><th>Tổng chỗ</th><th>Đã ĐK</th><th>Còn lại</th><th>Trạng thái</th><th></th></tr>
+          </thead>
+          <tbody id="scheduleTableBody"></tbody>
+        </table>
+      </section>
     </main>
   </div>
 

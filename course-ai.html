@@ -189,6 +189,8 @@
 
       <!-- RIGHT: SIDEBAR -->
       <aside class="course-sidebar" id="register">
+        <div class="schedule-widget" data-schedule="ai" hidden></div>
+
         <div class="price-card">
           <span class="price-card__label">Học phí khóa học</span>
           <span class="price-card__value">4.000.000<span class="text-accent">đ</span></span>
@@ -245,16 +247,7 @@
 
     <div class="container trust-testimonials">
       <h2 class="section__title">Học viên nói gì về khóa Ứng dụng AI</h2>
-      <div class="grid grid--3 testimonial-grid" style="margin-top:0">
-        <blockquote class="testimonial">
-          <p>"Khóa Ứng dụng AI giúp mình tiết kiệm rất nhiều thời gian soạn thảo và xử lý công việc hàng ngày."</p>
-          <footer><span class="testimonial__name">Phạm Hồng Nhung</span><span class="testimonial__role">Chủ doanh nghiệp nhỏ</span></footer>
-        </blockquote>
-        <blockquote class="testimonial">
-          <p>"Chỉ sau vài buổi học, cả team mình đã biết cách dùng AI để lên ý tưởng nội dung nhanh hơn rất nhiều."</p>
-          <footer><span class="testimonial__name">Đỗ Quang Vinh</span><span class="testimonial__role">Trưởng phòng Marketing</span></footer>
-        </blockquote>
-      </div>
+      <div class="grid grid--3 testimonial-grid" style="margin-top:0" data-testimonials="ai"></div>
     </div>
 
     <div class="container trust-faq">
@@ -406,6 +399,7 @@
 
 <script src="js/supabase-config.js"></script>
 <script src="js/main.js"></script>
+<script src="js/dynamic-content.js"></script>
 <script src="js/chatbot.js"></script>
 </body>
 </html>

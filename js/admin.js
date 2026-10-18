@@ -145,6 +145,180 @@
       });
 
       refreshBtn.addEventListener('click', () => loadRegistrations(client));
+
+      initTabs();
+      initTestimonials(client);
+      initSchedules(client);
     });
   });
+
+  // ===== Tabs =====
+  function initTabs() {
+    const tabs = document.querySelectorAll('.admin-tab');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('is-active'));
+        tab.classList.add('is-active');
+        document.querySelectorAll('.admin-panel').forEach(p => { p.hidden = true; });
+        document.getElementById(tab.dataset.tab).hidden = false;
+      });
+    });
+  }
+
+  const COURSE_LABEL = { mos: 'MOS', java: 'Lập trình Java', ai: 'Ứng dụng AI' };
+  const escHtml = (s) => (s == null ? '' : String(s)).replace(/[&<>"']/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[c]));
+
+  // ===== Testimonials =====
+  function initTestimonials(client) {
+    const toggleBtn = document.getElementById('testimonialAddToggle');
+    const form = document.getElementById('testimonialForm');
+    const errorEl = document.getElementById('testimonialError');
+    const saveBtn = document.getElementById('testimonialSaveBtn');
+    const tbody = document.getElementById('testimonialTableBody');
+
+    toggleBtn.addEventListener('click', () => { form.hidden = !form.hidden; });
+
+    async function load() {
+      tbody.innerHTML = '<tr><td colspan="5" class="admin-table__loading">Đang tải...</td></tr>';
+      const { data, error } = await client.from('testimonials').select('*').order('created_at', { ascending: false });
+      if (error) {
+        tbody.innerHTML = '<tr><td colspan="5" class="admin-error">Lỗi: ' + escHtml(error.message) + '</td></tr>';
+        return;
+      }
+      if (data.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" class="admin-empty">Chưa có đánh giá nào.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = '';
+      data.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML =
+          '<td>' + escHtml(row.student_name) + '</td>' +
+          '<td>' + escHtml(row.student_role || '—') + '</td>' +
+          '<td>' + (COURSE_LABEL[row.course] || row.course) + '</td>' +
+          '<td class="admin-table__msg">' + escHtml(row.content) + '</td>' +
+          '<td><button type="button" class="admin-delete-btn" data-id="' + escHtml(row.id) + '">Xoá</button></td>';
+        tbody.appendChild(tr);
+      });
+      tbody.querySelectorAll('.admin-delete-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          if (!confirm('Xoá đánh giá này?')) return;
+          await client.from('testimonials').delete().eq('id', btn.dataset.id);
+          load();
+        });
+      });
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorEl.textContent = '';
+      const name = document.getElementById('tName').value.trim();
+      const role = document.getElementById('tRole').value.trim();
+      const course = document.getElementById('tCourse').value;
+      const content = document.getElementById('tContent').value.trim();
+      if (!name || !content) {
+        errorEl.textContent = 'Vui lòng nhập tên và nội dung đánh giá.';
+        return;
+      }
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Đang lưu...';
+      const { error } = await client.from('testimonials').insert({
+        student_name: name, student_role: role || null, course, content
+      });
+      saveBtn.disabled = false;
+      saveBtn.textContent = 'Lưu đánh giá';
+      if (error) {
+        errorEl.textContent = 'Không lưu được: ' + error.message;
+        return;
+      }
+      form.reset();
+      form.hidden = true;
+      load();
+    });
+
+    load();
+  }
+
+  // ===== Class schedules =====
+  function initSchedules(client) {
+    const toggleBtn = document.getElementById('scheduleAddToggle');
+    const form = document.getElementById('scheduleForm');
+    const errorEl = document.getElementById('scheduleError');
+    const saveBtn = document.getElementById('scheduleSaveBtn');
+    const tbody = document.getElementById('scheduleTableBody');
+
+    toggleBtn.addEventListener('click', () => { form.hidden = !form.hidden; });
+
+    async function load() {
+      tbody.innerHTML = '<tr><td colspan="7" class="admin-table__loading">Đang tải...</td></tr>';
+      const { data, error } = await client.from('class_schedules').select('*').order('start_date', { ascending: true });
+      if (error) {
+        tbody.innerHTML = '<tr><td colspan="7" class="admin-error">Lỗi: ' + escHtml(error.message) + '</td></tr>';
+        return;
+      }
+      if (data.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="admin-empty">Chưa có lịch khai giảng nào.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = '';
+      data.forEach(row => {
+        const remaining = Math.max(row.total_slots - row.filled_slots, 0);
+        const tr = document.createElement('tr');
+        tr.innerHTML =
+          '<td>' + (COURSE_LABEL[row.course] || row.course) + '</td>' +
+          '<td>' + new Date(row.start_date + 'T00:00:00').toLocaleDateString('vi-VN') + '</td>' +
+          '<td>' + row.total_slots + '</td>' +
+          '<td>' + row.filled_slots + '</td>' +
+          '<td>' + remaining + '</td>' +
+          '<td><button type="button" class="admin-status-btn ' + (row.is_active ? 'admin-status-btn--active' : 'admin-status-btn--inactive') + '" data-id="' + escHtml(row.id) + '" data-active="' + row.is_active + '">' + (row.is_active ? 'Đang mở' : 'Đã đóng') + '</button></td>' +
+          '<td><button type="button" class="admin-delete-btn" data-id="' + escHtml(row.id) + '">Xoá</button></td>';
+        tbody.appendChild(tr);
+      });
+      tbody.querySelectorAll('.admin-status-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const isActive = btn.dataset.active === 'true';
+          await client.from('class_schedules').update({ is_active: !isActive }).eq('id', btn.dataset.id);
+          load();
+        });
+      });
+      tbody.querySelectorAll('.admin-delete-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          if (!confirm('Xoá lịch khai giảng này?')) return;
+          await client.from('class_schedules').delete().eq('id', btn.dataset.id);
+          load();
+        });
+      });
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorEl.textContent = '';
+      const course = document.getElementById('sCourse').value;
+      const startDate = document.getElementById('sDate').value;
+      const total = parseInt(document.getElementById('sTotal').value, 10) || 0;
+      const filled = parseInt(document.getElementById('sFilled').value, 10) || 0;
+      if (!startDate) {
+        errorEl.textContent = 'Vui lòng chọn ngày khai giảng.';
+        return;
+      }
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Đang lưu...';
+      const { error } = await client.from('class_schedules').insert({
+        course, start_date: startDate, total_slots: total, filled_slots: filled
+      });
+      saveBtn.disabled = false;
+      saveBtn.textContent = 'Lưu lịch khai giảng';
+      if (error) {
+        errorEl.textContent = 'Không lưu được: ' + error.message;
+        return;
+      }
+      form.reset();
+      form.hidden = true;
+      load();
+    });
+
+    load();
+  }
 })();

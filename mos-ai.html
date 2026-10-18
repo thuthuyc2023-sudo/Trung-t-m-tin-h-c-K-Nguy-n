@@ -229,6 +229,8 @@
 
       <!-- RIGHT: SIDEBAR -->
       <aside class="course-sidebar" id="register">
+        <div class="schedule-widget" data-schedule="mos" hidden></div>
+
         <div class="price-card">
           <span class="price-card__label">Chọn gói học phù hợp</span>
 
@@ -295,16 +297,7 @@
 
     <div class="container trust-testimonials">
       <h2 class="section__title">Học viên nói gì về khóa MOS</h2>
-      <div class="grid grid--3 testimonial-grid" style="margin-top:0">
-        <blockquote class="testimonial">
-          <p>"Mình đi từ không biết gì về Excel đến đậu chứng chỉ MOS chỉ sau 2 tháng. Giảng viên hỗ trợ rất tận tình."</p>
-          <footer><span class="testimonial__name">Nguyễn Thị Lan</span><span class="testimonial__role">Nhân viên văn phòng</span></footer>
-        </blockquote>
-        <blockquote class="testimonial">
-          <p>"Trước đây dùng Excel rất chậm, giờ mình làm báo cáo nhanh gấp đôi nhờ các hàm được học ở Kỷ Nguyên."</p>
-          <footer><span class="testimonial__name">Nguyễn Văn Đạt</span><span class="testimonial__role">Nhân viên kế toán</span></footer>
-        </blockquote>
-      </div>
+      <div class="grid grid--3 testimonial-grid" style="margin-top:0" data-testimonials="mos"></div>
     </div>
 
     <div class="container trust-faq">
@@ -456,6 +449,7 @@
 
 <script src="js/supabase-config.js"></script>
 <script src="js/main.js"></script>
+<script src="js/dynamic-content.js"></script>
 <script src="js/chatbot.js"></script>
 </body>
 </html>
