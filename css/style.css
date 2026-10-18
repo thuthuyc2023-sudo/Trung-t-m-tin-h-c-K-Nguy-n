@@ -451,9 +451,12 @@ svg { width: 22px; height: 22px; }
   pointer-events: none;
 }
 .course-banner__device {
+  /* Neo theo mép trên (không dùng top:50%) — vì chiều cao .course-banner
+     thay đổi theo số dòng chữ bị xuống dòng (title/subtitle/meta-pills),
+     canh giữa theo chiều dọc sẽ khiến ảnh trôi xuống đè vào chữ ở những
+     màn hình chữ xuống dòng nhiều. Neo cố định theo top luôn ổn định. */
   position: absolute;
-  right: 0; top: 50%;
-  transform: translateY(-50%);
+  right: 0; top: 150px;
   width: clamp(240px, 30vw, 480px);
   opacity: 0.9;
   filter: drop-shadow(0 30px 60px rgba(0,0,0,.6));
@@ -930,6 +933,10 @@ svg { width: 22px; height: 22px; }
   .mock__side { display: none; }
   .course-layout { grid-template-columns: 1fr; }
   .course-sidebar { position: static; }
+  /* Ẩn hẳn ảnh minh họa banner dưới 960px — đây là vùng chữ xuống dòng
+     nhiều (title 2 dòng, subtitle 2-3 dòng, hàng meta-pill) nên dễ chồng
+     lên ảnh dù đã co nhỏ bằng clamp(); an toàn nhất là bỏ hẳn ảnh. */
+  .course-banner__device { display: none; }
 }
 
 @media (max-width: 640px) {
@@ -940,7 +947,6 @@ svg { width: 22px; height: 22px; }
   .footer__inner { grid-template-columns: 1fr; }
   .mock__row { grid-template-columns: 1fr; }
   .course-banner { padding: 120px 0 50px; }
-  .course-banner__device { display: none; }
   .check-grid { grid-template-columns: 1fr; }
   .curriculum__item { gap: 14px; }
 }
